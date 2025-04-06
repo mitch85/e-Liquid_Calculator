@@ -103,15 +103,72 @@
     class="flex flex-col rounded-md border-2 border-stone-700 w-full p-4 mt-2"
   >
     <h1 class="font-bold">Aromen</h1>
-    <table class="border border-slate-700 rounded-md">
+    <table class="border border-slate-700 rounded-md w-full">
       <tr class="text-left">
         <th>Aroma</th>
         <th>Menge</th>
         <th></th>
       </tr>
-      <tr></tr>
+      <tr *ngFor="let flavor of userFlavors; let i = index">
+        <td class="w-3/5">
+          <select
+            *ngIf="
+              (edit && i == userFlavors.length - 1) ||
+              (!edit && itemToEdit == i)
+            "
+            [(ngModel)]="flavor.name"
+            name="selectName{{ i }}"
+          >
+            <option [ngValue]="null" disabled selected>— bitte wählen —</option>
+            <option *ngFor="let f of flavors; let y = index">
+              {{ f }}
+            </option>
+          </select>
+          <span
+            *ngIf="
+              (edit && i != userFlavors.length - 1) ||
+              (!edit && itemToEdit != i)
+            "
+            >{{ flavor.name }}</span
+          >
+        </td>
+        <td class="w-1/5">
+          <input
+            type="number"
+            class="border border-slate-700 w-10"
+            *ngIf="
+              (edit && i == userFlavors.length - 1) ||
+              (!edit && itemToEdit == i)
+            "
+            [(ngModel)]="flavor.percent"
+            name="percentName{{ i }}"
+          />
+          <span
+            *ngIf="
+              (edit && i != userFlavors.length - 1) ||
+              (!edit && itemToEdit != i)
+            "
+            >{{ flavor.percent }}</span
+          >
+        </td>
+        <td class="w-1/5">
+          <button
+            class="bg-neutral-200 border border-slate-500 rounded px-2"
+            *ngIf="!edit && itemToEdit == undefined"
+            (click)="edititem(i)"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
     </table>
     <div class="text-right mt-2">
+      <button
+        class="bg-neutral-200 border border-slate-500 rounded px-2"
+        (click)="save()"
+      >
+        OK
+      </button>
       <button
         class="bg-neutral-200 border border-slate-500 rounded px-2"
         (click)="addFlavor()"
