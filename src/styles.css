@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrollar_mma::-webkit-scrollbar {
+  width: 10px; /* Breite des Scrollbalkens */
+}
+
+.scrollar_mma::-webkit-scrollbar-track {
+  background: #eee; /* Hintergrund des Scroll-Bereichs */
+}
+
+.scrollar_mma::-webkit-scrollbar-thumb {
+  background: #aaa; /* Farbe des Scrollbalkens */
+  /* z.B. border-radius: 5px; */
+}

@@ -56,4 +56,6 @@ export class AppComponent {
     this.itemToEdit = idx;
     this.edit = false;
   }
+
+  saveReceipt() {}
 }
