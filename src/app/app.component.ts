@@ -93,15 +93,24 @@ export class AppComponent implements OnInit {
     this.edit = true;
   }
 
+  onChangeAmount() {
+    console.log(this.amount);
+
+    this.userFlavors.map((f: any) => {
+      f.ml = ((this.amount * f.percent) / 100).toFixed(3);
+      f.mg = (f.ml * this.references.flavor).toFixed(3);
+    });
+  }
+
   onChangeFlavor(idx: number) {
     this.userFlavors[idx].ml = (
       (this.amount * this.userFlavors[idx].percent) /
       100
-    ).toFixed(2);
+    ).toFixed(3);
 
     this.userFlavors[idx].mg = (
       this.userFlavors[idx].ml * this.references.flavor
-    ).toFixed(2);
+    ).toFixed(3);
   }
 
   getAmountOfAllFlavors(): number {
@@ -193,26 +202,26 @@ export class AppComponent implements OnInit {
     const pg =
       (this.amount * this.pg - this.nikBase * this.pgNic) / 100 -
       this.getAmountOfAllFlavors();
-    if (unit == 'ml') return pg.toFixed(2);
-    return (pg * this.references.pg).toFixed(2);
+    if (unit == 'ml') return pg.toFixed(3);
+    return (pg * this.references.pg).toFixed(3);
   }
 
   getVG(unit: any = null) {
     const vg = (this.amount * this.vg - this.nikBase * this.vgNic) / 100;
-    if (unit == 'ml') return vg.toFixed(2);
-    return (vg * this.references.vg).toFixed(2);
+    if (unit == 'ml') return vg.toFixed(3);
+    return (vg * this.references.vg).toFixed(3);
   }
 
   getNik(unit: any = null) {
     this.nikBase = this.amount / (this.nicStrength / this.nicTarget);
     if (unit == 'ml') {
-      return this.nikBase.toFixed(2);
+      return this.nikBase.toFixed(3);
     }
     return (
       (this.nikBase *
         (this.vgNic * this.references.vg + this.pgNic * this.references.pg)) /
       100
-    ).toFixed(2);
+    ).toFixed(3);
   }
 
   onChangeReceipt() {

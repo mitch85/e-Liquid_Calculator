@@ -1,9 +1,9 @@
 {
-  "name": "e-liquid-calculator",
-  "productName": "eLiquidCalc",
+  "name": "lec",
+  "productName": "LEC",
   "version": "1.0.0-beta",
   "main": "electron/main.js",
-  "description": "e-liquid-calculator",
+  "description": "Linux E-Liquid Calculator",
   "author": "Michael Marciniak <info@michael-marciniak.de>",
   "email": "info@michael-marciniak.de",
   "scripts": {
@@ -50,8 +50,9 @@
     "typescript": "~5.4.2"
   },
   "build": {
-    "appId": "com.deinname.eliquidcalculator",
-    "productName": "E-Liquid-Calculator",
+    "appId": "com.deinname.lec",
+    "productName": "lec",
+    "icon": "public/icon",
     "files": [
       {
         "from": "electron",

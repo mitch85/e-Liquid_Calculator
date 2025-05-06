@@ -82,27 +82,46 @@ const menuTemplate = [
     ],
   },
   {
-    label: "Help",
+    label: "Info",
     submenu: [
       {
         label: "Info",
         click: () => {
-          shell.openExternal("https://example.com/info");
+          createInfoWindow();
         },
       },
     ],
   },
 ];
 
+function createInfoWindow() {
+  const infoWindow = new BrowserWindow({
+    width: 400,
+    height: 200,
+    title: "Info",
+    modal: true,
+    parent: mainWindow,
+    frame: true,
+    resizable: false,
+    minimizable: false,
+    maximizable: false,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+
+  infoWindow.loadFile(path.join(__dirname, "info.html"));
+}
+
 const menu = Menu.buildFromTemplate(menuTemplate);
 Menu.setApplicationMenu(menu);
-app.setName("eLiquidCalc");
+app.setName("lec");
 // Error Handling
 process.on("uncaughtException", (error) => {
   console.error("Unexpected error: ", error);
 });
 function createWindow() {
-  app.setName("eLiquidCalc");
+  app.setName("lec");
   mainWindow = new BrowserWindow({
     width: 600,
     height: 900,
@@ -112,13 +131,16 @@ function createWindow() {
       enableRemoteModule: false,
       zoomFactor: 0.8,
     },
+    icon: __dirname + "../public/VAPICON-Icon.svg",
   });
-  //mainWindow.loadURL("http://localhost:4200");
+
+  console.log(path.join(__dirname + "../public/VAPICON-Icon.png"));
+
+  mainWindow.loadURL("http://localhost:4200");
   // mainWindow.loadFile(
   //   path.join(__dirname, "../dist/e-liquid-calculator/browser/index.html")
-
   // );
-  mainWindow.loadFile(path.join(__dirname, "../app/index.html"));
+  // mainWindow.loadFile(path.join(__dirname, "../app/index.html"));
 
   // mainWindow.openDevTools();
 
